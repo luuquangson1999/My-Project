@@ -12,18 +12,22 @@ const Slide = () => {
   const nextSlide = () => {
     if (slideIndex !== DataSlice.length) {
       setSlideIndex(slideIndex + 1)
-    } 
+    }
     else if (slideIndex === DataSlice.length) {
       setSlideIndex(1)
     }
   }
   const prevSlide = () => {
-    if(slideIndex !== 1) {
+    if (slideIndex !== 1) {
       setSlideIndex(slideIndex - 1)
     }
-      else if (slideIndex === 1){
-        setSlideIndex(DataSlice.length)
-      }
+    else if (slideIndex === 1) {
+      setSlideIndex(DataSlice.length)
+    }
+  }
+
+  const moveDot = (i) => {
+    setSlideIndex(i)
   }
   return (
 
@@ -42,6 +46,14 @@ const Slide = () => {
       <BtnSlice moveSlide={nextSlide} direction={"next"} />
       <BtnSlice moveSlide={prevSlide} direction={"prev"} />
 
+
+      <div className="container-dots">
+        {Array.from({ length: 5 }).map((item, i) => (
+          <div
+            onClick={() => moveDot(i + 1)}
+            className={slideIndex === i + 1 ? "dot active" : "dot"}></div>
+        ))}
+      </div>
     </div>
 
   );
